@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copy Content App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: rgba(3, 190, 3, 0.577);
+    }
+
+    .copy-container {
+      margin-bottom: 20px;
+    }
+
+    .copy-input {
+      padding: 8px;
+      margin-right: 10px;
+      font-size: 14px;
+      width: 125px;
+      cursor: pointer;
+    }
+
+    .copy-button {
+      font-size: 14px;
+      cursor: pointer;
+      height: 40px;
+      width: 190px;
+      background-color: dodgerblue;
+      color: white;
+      letter-spacing: 0.2px;
+    }
+
+    .skills-container,
+    .education-container,
+    .experience-container,
+    .linkedin-container,
+    .cover-letter-container,
+    .email-template-container {
+      display: grid;
+      grid-template-columns: repeat(6, 0fr);
+      grid-auto-rows: minmax(60px, auto);
+    }
+
+    .details {
+      height: 100px;
+      width: 200px;
+      white-space: pre-line;
+    }
+
+    .education-linkedin_container {
+      display: flex;
+    }
+
+    .diplay-flex-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .linkedin-request-container {
+      display: flex;
+    }
+
+    #education {
+      width: 190px;
+    }
+
+    #designation {
+      width: 250px;
+    }
+
+    #linkedin {
+      width: 275px;
+    }
+
+    #cover-letter,
+    #email-template,
+    #linkedin-request {
+      grid-column: span 6;
+    }
+
+    #email-template textarea,
+    #linkedin-request textarea {
+      height: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Skills</h1>
+
+  <!-- Array of skills -->
+  <script>
+    var skills = [
+      "JavaScript", "React", "Redux", "HTML", "HTML5", "CSS", "SCSS", "Emotion-CSS", "Tailwind CSS", "Linaria",
+      "Bootstrap", "Webpack", "REST APIs", "NodeJS", "C", "C++", "C#.NET", "SQL", "PHP", "YARN", "NPM", "Git",
+      "DOM Manipulation", "XML", "Unit Testing", "Data Structures and Algorithms", "Object Oriented Programming",
+      "Operating Systems", "Database Management System"
+    ];
+
+    var startDate = new Date("July 1, 2023");
+    var currentDate = new Date();
+    var experienceMonths = (currentDate.getMonth() - startDate.getMonth()) + 12 * (currentDate.getFullYear() - startDate.getFullYear());
+
+    var experience;
+    if (experienceMonths >= 12) {
+      var years = Math.floor(experienceMonths / 12);
+      experience = years === 1 ? `${years} year` : `${years} years`;
+    } else {
+      experience = experienceMonths === 1 ? `${experienceMonths} month` : `${experienceMonths} months`;
+    }
+
+    // Function to copy all skills as a comma-separated string
+    function copyAllSkills() {
+      var allSkills = skills.join(", ");
+      var copyText = document.getElementById('allSkills');
+      copyText.value = allSkills;
+      copyText.select();
+      document.execCommand("copy");
+    }
+
+    // Array of experiences
+    var experiences = [
+      {
+        companyName: "Housing.com",
+        designation: "Software Development Engineer Intern",
+        details: `
+          I bring ${experience} of valuable experience as an SDE intern in Housing.com, where I specialized in developing responsive web applications using a tech stack that includes JavaScript, React, SCSS, Redux, and Styled Components. During my internship, I adhered to industry-level coding conventions and adopted standard front-end practices, showcasing my commitment to delivering high-quality solutions.
+
+          • Developed and maintained responsive web applications using JavaScript, React, SCSS, Redux, and Styled Components using industry-level coding conventions and standard front-end practices.
+          • Led a significant revamp of the Listing Form and Form Navigator, resulting in a 52% increase in the initiation of self-verification and a 65% increase in listing completion, leading to a PAN India release.
+          • Redesigned key user touch points, including the Re-post popup, Feedback modal, and Leads Tab, driving increased user interaction by 37%.
+          • Created 2 new widgets for the dashboard, resulting in increased initiation of self-verification and optimizing user accessibility and experience.
+          • Integrated Google Analytics Events into various flows, collaborating cross-functionally to address legacy bugs and support tasks.
+        `
+      },
+      {
+        companyName: "The Sparks Foundation",
+        designation: "Web Development and Designing Intern",
+        details: `
+          Developed a robust online banking system website, implementing PHP for server-side scripting.
+          Executed Reading and Updating functionalities, managing CRUD operations for SQL tables with a user base exceeding 5000.
+        `
+      }
+      // Add more experiences as needed
+    ];
+
+    function copyToClipboard(elementId) {
+      var copyText = document.getElementById(elementId);
+      copyText.select();
+      document.execCommand("copy");
+    }
+
+    function updateCoverLetter() {
+      var position = document.getElementById('position').value || "Software Engineer";
+      var company = document.getElementById('company').value || "COMPANY_NAME";
+
+      var coverLetter =
+        `Dear Hiring Manager,
+
+        I am writing to express my ardent interest in the ${position} position at ${company}. Armed with ${experience} of invaluable experience as a Software Development Engineer intern at Housing.com and a robust educational background in Computer Engineering from Delhi Technological University, I am confident in my ability to contribute significantly to your esteemed organization.
+
+        During my internship at Housing.com, I specialized in crafting responsive web applications utilizing a robust tech stack, including JavaScript, React, SCSS, Redux, and Styled Components. My commitment to adhering to industry-level coding conventions and embracing standard front-end practices underscored my dedication to delivering high-quality solutions.
+
+        What sets me apart is my strong foundation in Data Structures and Algorithms, evidenced by my accomplishments on esteemed platforms such as Codechef, Leetcode, GeeksForGeeks, and HackerRank. The blend of my problem-solving skills and academic prowess, reflected in my impressive CGPA of 8.58 at Delhi Technological University, equips me to tackle intricate challenges effectively. Additionally, my proficiency extends to various front-end technologies, programming languages, and web development tools, as detailed in my enclosed resume.
+
+        I am eager to bring my technical expertise and passion for innovation to ${company}, contributing to your organization's continued success. I am confident that my skills align seamlessly with the goals and vision of ${company}.
+
+        Thank you for considering my application. I am enthusiastic about the opportunity to further discuss how my skills and experiences align with the needs of ${company}. I look forward to the possibility of an interview to explore in greater detail how I can contribute to the dynamic team at ${company}.
+
+        Sincerely,
+
+        Abhinav Lohia
+        LinkedIn Profile: https://www.linkedin.com/in/abhinavlohia22/
+        Email Address: helloabhinavlohia22@gmail.com
+      `;
+
+      document.getElementById('cover-letter').value = coverLetter;
+    }
+
+    function updateEmailTemplate() {
+      var jobTitle = document.getElementById('jobTitle').value || "Software Engineer";
+      var companyName = document.getElementById('companyName').value || "COMPANY_NAME";
+
+      var emailTemplate =
+        `Hi,
+
+        I hope this email finds you well. My name is Abhinav Lohia, and I am reaching out to express my interest in the ${jobTitle} position at ${companyName}. I learned about this exciting opportunity, and I am enthusiastic about the prospect of contributing to ${companyName}'s dynamic team.
+
+        Why I'm a Great Fit:
+
+        I bring ${experience} of hands-on experience as a Software Development Engineer at Housing.com, where I focused on developing responsive web applications using a robust tech stack including JavaScript, React js, SCSS, Redux, and Styled Components. During my internship, I adhered to industry-level coding conventions and adopted standard front-end practices, showcasing my commitment to delivering high-quality solutions.
+
+        Front-end Technologies: React, Redux toolkit, React Router, HTML, CSS, SCSS, and more.
+        Programming Languages: JavaScript, C, C++, SQL, PHP.
+        Web Development Tools: NodeJS, Webpack, YARN, NPM, and more.
+        Other Technologies: Git, XML, REST APIs, Object-Oriented Programming, Unit Testing.
+        Generative AI and Prompt Engineering: ChatGPT, Tabnine, Codeium, GitHub Copilot and more.
+
+        I am excited about the opportunity to contribute to ${companyName}'s success and believe that my technical skills, problem-solving abilities, and commitment to excellence align well with the requirements of the role. I have attached my resume for your reference, and I look forward to the possibility of discussing how my skills can contribute to the success of ${companyName}'s engineering team.
+
+        Thank you for considering my application. I am available at your earliest convenience for an interview.
+
+        Best Regards,
+        Abhinav Lohia
+        LinkedIn Profile: https://www.linkedin.com/in/abhinavlohia22/
+        Phone: 9205035669
+      `;
+
+      document.getElementById('email-template').value = emailTemplate;
+    }
+
+    function updateLinkedInRequestTemplate() {
+      var personName = document.getElementById('personName').value || "";
+      var companyName = document.getElementById('companyNameLinkedIn').value || "your company";
+
+      var linkedInRequestTemplate =
+        `Hi ${personName},
+
+        I have an experience of ${experience} as SDE/Frontend and looking for some opportunity in ${companyName}.
+
+        Resume -
+        https://drive.google.com/file/d/1AFB3qh7MV_15yCVWAoXkzfo9KtdkPAAp/view?usp=drive_link
+      `;
+
+      document.getElementById('linkedin-request').value = linkedInRequestTemplate;
+    }
+  </script>
+
+  <!-- Generate input fields and buttons dynamically using map -->
+  <div id="skills-container" class="skills-container">
+    <!-- Map skills array to create copy containers -->
+    <script>
+      skills.map(skill => {
+        document.getElementById('skills-container').innerHTML +=
+          `<div class="copy-container">
+              <input type="text" onclick="copyToClipboard('${skill.toLowerCase()}')" 
+              class="copy-input" id="${skill.toLowerCase()}" value="${skill}" readonly>
+              </div>`;
+      });
+    </script>
+    <!-- Add ALL button to copy all skills -->
+    <div class="copy-container">
+      <input type="text" onclick="copyAllSkills()" class="copy-input" id="allSkills" value="SELECT ALL" readonly>
+    </div>
+  </div>
+
+  <div class="education-linkedin_container">
+    <div class='diplay-flex-column'>
+      <h1>Education</h1>
+      <!-- Education Section -->
+      <div id="education-container" class="education-container">
+        <div class="copy-container">
+          <input type="text" onclick="copyToClipboard('education')" class="copy-input" id="education"
+            value="Delhi Technological University" readonly>
+        </div>
+      </div>
+    </div>
+
+    <div class='diplay-flex-column'>
+      <h1>LinkedIn</h1>
+      <!-- LinkedIn Section -->
+      <div id="linkedin-container" class="linkedin-container">
+        <div class="copy-container">
+          <input type="text" onclick="copyToClipboard('linkedin')" class="copy-input" id="linkedin"
+            value="https://www.linkedin.com/in/abhinavlohia22/" readonly>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1>Experience</h1>
+  <!-- Experience Section -->
+  <div id="experience-container" class="experience-container">
+    <!-- Map experiences array to create copy containers -->
+    <script>
+      experiences.map((experience, index) => {
+        document.getElementById('experience-container').innerHTML +=
+          `<div class = "experience-${index + 1}"> 
+          <div class="copy-container experience-part">
+              <input type="text" onclick="copyToClipboard('companyName${index}')" 
+                     class="copy-input company-name" id="companyName${index}" 
+                     value="${experience.companyName}" readonly>
+          </div>
+          <div class="copy-container experience-part">
+              <input type="text" onclick="copyToClipboard('designation${index}')" 
+                     class="copy-input designation" id="designation${index}" 
+                     value="${experience.designation}" readonly>
+          </div>
+          <div class="copy-container experience-part">
+              <textarea onclick="copyToClipboard('experienceDetails${index}')" 
+                        class="copy-input details" id="experienceDetails${index}" readonly>
+                ${experience.details}
+              </textarea>
+          </div></div>`;
+      });
+    </script>
+  </div>
+
+  <h1>Cover Letter</h1>
+  <!-- Cover Letter Section -->
+  <div id="cover-letter-container" class="cover-letter-container">
+    <div class="copy-container">
+      <input type="text" class="copy-input" id="position" placeholder="Position">
+    </div>
+    <div class="copy-container">
+      <input type="text" class="copy-input" id="company" placeholder="Company Name">
+    </div>
+    <div class="copy-container">
+      <textarea onclick="copyToClipboard('cover-letter')" class="copy-input details" id="cover-letter"
+        readonly></textarea>
+    </div>
+    <div class="copy-container">
+      <button class="copy-button" onclick="updateCoverLetter()">Generate Cover Letter</button>
+    </div>
+  </div>
+
+  <h1>Email Template</h1>
+  <!-- Email Template Section -->
+  <div id="email-template-container" class="email-template-container">
+    <div class="copy-container">
+      <input type="text" class="copy-input" id="jobTitle" placeholder="Position">
+    </div>
+    <div class="copy-container">
+      <input type="text" class="copy-input" id="companyName" placeholder="Company Name">
+    </div>
+    <div class="copy-container">
+      <textarea onclick="copyToClipboard('email-template')" class="copy-input details" id="email-template"
+        readonly></textarea>
+    </div>
+    <div class="copy-container">
+      <button class="copy-button" onclick="updateEmailTemplate()">Generate Email Template</button>
+    </div>
+  </div>
+
+  <h1>LinkedIn Request Template</h1>
+  <!-- LinkedIn Request Template Section -->
+  <div id="linkedin-request-container" class="linkedin-request-container">
+    <div class="copy-container">
+      <input type="text" class="copy-input" id="personName" placeholder="Person's Name">
+      <input type="text" class="copy-input" id="companyNameLinkedIn" placeholder="Company Name">
+    </div>
+    <div class="copy-container">
+      <textarea onclick="copyToClipboard('linkedin-request')" class="copy-input details" id="linkedin-request"
+        readonly></textarea>
+    </div>
+    <div class="copy-container">
+      <button class="copy-button" onclick="updateLinkedInRequestTemplate()">Generate LinkedIn Request Template</button>
+    </div>
+  </div>
+
+</body>
+
+</html>
